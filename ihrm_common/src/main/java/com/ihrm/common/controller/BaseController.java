@@ -14,20 +14,14 @@ public class BaseController {
 
     protected HttpServletRequest request;
     protected HttpServletResponse response;
-
+    protected String companyId;
+    protected String companyName;
     @ModelAttribute
     public void setReqAndResp(HttpServletRequest request,HttpServletResponse response){
         this.request = request;
         this.response = response;
-    }
-
-    //企业id,以后动态获取
-    public String parseCompanyId(){
-        return "1";
-    }
-
-    public String parseCompanyName(){
-        return  "河南师慧信息技术有限公司";
+        this.companyId = "1";
+        this.companyName = "河南师慧信息技术有限公司";
     }
 
 }

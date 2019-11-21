@@ -31,7 +31,7 @@ public class DepartmentController extends BaseController {
      */
     @RequestMapping(value = "/department",method = RequestMethod.POST)
     public Result add(@RequestBody Department department){
-        department.setCompanyId(parseCompanyId());
+        department.setCompanyId(companyId);
         departmentService.save(department);
         return Result.SUCCESS();
     }
@@ -41,7 +41,7 @@ public class DepartmentController extends BaseController {
      */
     @RequestMapping(value = "/department/{id}",method = RequestMethod.PUT)
     public Result update(@PathVariable(name = "id")String id,@RequestBody Department department){
-        department.setCompanyId(parseCompanyId());
+        department.setCompanyId(companyId);
         department.setId(id);
         departmentService.updateDepartment(department);
         return Result.SUCCESS();
@@ -66,7 +66,7 @@ public class DepartmentController extends BaseController {
     //组织机构列表
     @RequestMapping(value = "/department",method = RequestMethod.GET)
     public Result findAll() throws Exception{
-        Company company = companyService.findById(parseCompanyId());
+        Company company = companyService.findById(companyId);
         List<Department> departmentList = departmentService.findAll(company.getId());
         return new Result(ResultCode.SUCCESS,new DeptListResult(company,departmentList));
     }

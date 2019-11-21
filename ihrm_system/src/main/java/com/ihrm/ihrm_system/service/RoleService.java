@@ -1,6 +1,7 @@
 package com.ihrm.ihrm_system.service;
 
 import com.ihrm.common.entity.PageResult;
+import com.ihrm.common.service.BaseService;
 import com.ihrm.common.utils.IdWorker;
 import com.ihrm.domain.system.Role;
 import com.ihrm.ihrm_system.dao.RoleDao;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RoleService {
+public class RoleService extends BaseService {
     @Autowired
     private IdWorker idWorker;
     @Autowired
@@ -64,5 +65,9 @@ public class RoleService {
             }
         };
         return roleDao.findAll(specification, PageRequest.of(page-1,size));
+    }
+
+    public List<Role> findAll(String companyId) {
+        return roleDao.findAll(getSpecification(companyId));
     }
 }

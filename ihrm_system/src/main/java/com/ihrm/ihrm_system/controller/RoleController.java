@@ -9,6 +9,9 @@ import com.ihrm.ihrm_system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/sys")
@@ -20,7 +23,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/role",method = RequestMethod.POST)
     public Result save(@RequestBody Role role)throws Exception{
-        role.setCompanyId(parseCompanyId());
+        role.setCompanyId(companyId);
         roleService.save(role);
         return new Result(ResultCode.SUCCESS);
     }
@@ -58,5 +61,13 @@ public class RoleController extends BaseController {
         Page<Role> searchPage = roleService.findSearch(companyId, page, pagesize);
         PageResult pageResult = new PageResult(searchPage.getTotalElements(), searchPage.getContent());
         return new Result(ResultCode.SUCCESS,pageResult);
+    }
+
+
+    @RequestMapping(value = "/role/list",method = RequestMethod.GET)
+    public Result findAll(){
+        List<Role> roleList = roleService.findAll(companyId);
+        return new Result(ResultCode.SUCCESS,roleList);
+
     }
 }

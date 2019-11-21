@@ -25,7 +25,7 @@ public class Department implements Serializable {
     /**
      * 父级id
      */
-    @Column(name = "parent_id")
+    @Column(name = "pid")
     private String pid;
 
     /**
